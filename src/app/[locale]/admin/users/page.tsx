@@ -10,6 +10,7 @@ interface UserRow {
   full_name: string | null;
   role_id: string | null;
   roles: { name: string }[] | null;
+  roles: { name: string } | null;
 }
 
 interface RoleRow {
@@ -31,6 +32,8 @@ export default function AdminUsersPage() {
 
     setUsers(usersRes.data ?? []);
     setRoles(rolesRes.data ?? []);
+    setUsers((usersRes.data as UserRow[]) ?? []);
+    setRoles((rolesRes.data as RoleRow[]) ?? []);
   };
 
   useEffect(() => {
@@ -55,6 +58,7 @@ export default function AdminUsersPage() {
             <div>
               <div className="font-medium">{user.full_name || user.id}</div>
               <div className="text-sm text-slate-600">{t('currentRole')}: {user.roles?.[0]?.name ?? '-'}</div>
+              <div className="text-sm text-slate-600">{t('currentRole')}: {user.roles?.name || '-'}</div>
             </div>
 
             <select
