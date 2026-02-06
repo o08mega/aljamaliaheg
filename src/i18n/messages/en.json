@@ -43,4 +43,5 @@
   "servicesList": "Services List",
   "adminOnly": "This section is available for admin only.",
   "currentRole": "Current Role"
+  "contactError": "Something went wrong while sending"
 }
