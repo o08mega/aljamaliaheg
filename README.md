@@ -81,6 +81,8 @@ npm run dev
 
 - `supabase/migrations/202602060001_init_schema_rls.sql`
 - `supabase/migrations/202602060002_roles_editor_viewer_policies.sql`
+- `supabase/migrations/202602060003_seed_portal_master_data.sql`
+- `supabase/migrations/202602060004_role_management_helpers.sql`
 
 ### ماذا تفعل هذه المايجريشن؟
 
@@ -89,6 +91,18 @@ npm run dev
 3. تفعيل RLS.
 4. سياسات صلاحيات Admin/Editor/Viewer.
 5. Trigger يربط أي مستخدم جديد بدور `viewer` افتراضيًا.
+6. إدخال بيانات تشغيل أساسية لكل الجداول (News/Services/Health/Businesses/Ads/Settings).
+7. دالة إدارة أدوار من داخل Supabase: `public.set_user_role_by_email(email, role)`.
+
+### تنفيذ سريع داخل Supabase SQL Editor
+
+بعد إنشاء أول مستخدم Admin عبر Auth، نفّذ:
+
+```sql
+select public.set_user_role_by_email('admin@example.com', 'admin');
+```
+
+> غيّر البريد إلى البريد الحقيقي للمستخدم الذي تريد منحه صلاحية `admin` أو `editor` أو `viewer`.
 
 ---
 
