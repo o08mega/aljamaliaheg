@@ -9,6 +9,7 @@ interface UserRow {
   id: string;
   full_name: string | null;
   role_id: string | null;
+  roles: { name: string }[] | null;
   roles: { name: string } | null;
 }
 
@@ -29,6 +30,8 @@ export default function AdminUsersPage() {
       supabase.from('roles').select('id,name').order('name', { ascending: true })
     ]);
 
+    setUsers(usersRes.data ?? []);
+    setRoles(rolesRes.data ?? []);
     setUsers((usersRes.data as UserRow[]) ?? []);
     setRoles((rolesRes.data as RoleRow[]) ?? []);
   };
@@ -54,6 +57,7 @@ export default function AdminUsersPage() {
           <div key={user.id} className="grid items-center gap-2 rounded border p-3 md:grid-cols-[1fr_220px]">
             <div>
               <div className="font-medium">{user.full_name || user.id}</div>
+              <div className="text-sm text-slate-600">{t('currentRole')}: {user.roles?.[0]?.name ?? '-'}</div>
               <div className="text-sm text-slate-600">{t('currentRole')}: {user.roles?.name || '-'}</div>
             </div>
 
