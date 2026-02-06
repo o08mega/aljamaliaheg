@@ -1,5 +1,17 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { supabase } from '@/lib/supabase/client';
+
+export default function AdminLoginPage({
+  params: { locale }
+}: {
+  params: { locale: string };
+}) {
+  const t = useTranslations();
+  const router = useRouter();
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { supabase } from '@/lib/supabase/client';
@@ -10,6 +22,22 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
+  useEffect(() => {
+    const check = async () => {
+      const { data } = await supabase.auth.getUser();
+      if (data.user) router.replace(`/${locale}/admin/dashboard`);
+    };
+    check();
+  }, [locale, router]);
+
+  const login = async () => {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      setMessage(error.message);
+      return;
+    }
+
+    router.replace(`/${locale}/admin/dashboard`);
   const login = async () => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setMessage(error ? error.message : 'Logged in successfully');
@@ -39,6 +67,7 @@ export default function AdminLoginPage() {
           {t('login')}
         </button>
 
+        {message && <p className="mt-4 text-center text-sm text-red-700">{message}</p>}
         {message && <p className="mt-4 text-center text-sm text-gray-600">{message}</p>}
       </div>
     </div>
