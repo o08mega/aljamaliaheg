@@ -12,12 +12,6 @@ export default function AdminLoginPage({
 }) {
   const t = useTranslations();
   const router = useRouter();
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { supabase } from '@/lib/supabase/client';
-
-export default function AdminLoginPage() {
-  const t = useTranslations();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -38,9 +32,6 @@ export default function AdminLoginPage() {
     }
 
     router.replace(`/${locale}/admin/dashboard`);
-  const login = async () => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setMessage(error ? error.message : 'Logged in successfully');
   };
 
   return (
@@ -68,7 +59,6 @@ export default function AdminLoginPage() {
         </button>
 
         {message && <p className="mt-4 text-center text-sm text-red-700">{message}</p>}
-        {message && <p className="mt-4 text-center text-sm text-gray-600">{message}</p>}
       </div>
     </div>
   );
