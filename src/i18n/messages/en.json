@@ -12,5 +12,11 @@
   "login": "Login",
   "dashboard": "Dashboard",
   "latestNews": "Latest News",
-  "quickActions": "Quick Actions"
+  "quickActions": "Quick Actions",
+  "contactFormTitle": "Send a message",
+  "name": "Name",
+  "message": "Message",
+  "send": "Send",
+  "contactSuccess": "Your message was sent successfully",
+  "contactError": "Something went wrong while sending"
 }

@@ -12,5 +12,11 @@
   "login": "دخول",
   "dashboard": "لوحة الإدارة",
   "latestNews": "آخر الأخبار",
-  "quickActions": "إجراءات سريعة"
+  "quickActions": "إجراءات سريعة",
+  "contactFormTitle": "أرسل رسالة",
+  "name": "الاسم",
+  "message": "الرسالة",
+  "send": "إرسال",
+  "contactSuccess": "تم إرسال رسالتك بنجاح",
+  "contactError": "حدث خطأ أثناء الإرسال"
 }

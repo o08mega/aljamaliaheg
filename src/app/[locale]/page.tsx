@@ -1,8 +1,13 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { Newspaper, ShieldCheck, Stethoscope } from 'lucide-react';
 
-export default async function HomePage() {
+export default async function HomePage({
+  params: { locale }
+}: {
+  params: { locale: string };
+}) {
   const t = await getTranslations();
 
   return (
@@ -10,6 +15,14 @@ export default async function HomePage() {
       <section className="space-y-3">
         <h1 className="text-3xl font-bold text-blue-900">{t('siteName')}</h1>
         <p className="text-lg text-gray-700">{t('tagline')}</p>
+        <div className="flex gap-3">
+          <Link href={`/${locale}/contact`} className="rounded bg-blue-700 px-4 py-2 text-white">
+            {t('contact')}
+          </Link>
+          <Link href={`/${locale}/admin/login`} className="rounded border border-blue-700 px-4 py-2 text-blue-700">
+            {t('adminLogin')}
+          </Link>
+        </div>
       </section>
 
       <section className="grid gap-4 md:grid-cols-3">
